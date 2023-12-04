@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ado-agent-fi
+  labels:
+    app: ado-agent-fi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ado-agent-fi
+  template:
+    metadata:
+      name: ado-agent-fi
+      labels:
+        app: ado-agent-fi
+        azure.workload.identity/use: "true"
+    spec:
+      serviceAccountName: ado-agent-sa
+      containers:
+        - name: ado-agent-fi
+          image: eggboy/ado-agent-fi:3.0.0
+          imagePullPolicy: Always
+          env:
+            - name: AZP_URL
+              value: https://dev.azure.com/changl0368
+            - name: AZP_POOL
+              value: aks-federated-identity
+            - name: AZP_AGENT_NAME
+              value: aks-agent
+      restartPolicy: Always
