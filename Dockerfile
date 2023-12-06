@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 
 RUN apt update && apt upgrade -y && \
-    apt install -y ca-certificates curl apt-transport-https lsb-release gnupg jq libicu-dev && \
+    apt install -y ca-certificates curl apt-transport-https lsb-release gnupg jq libicu-dev git && \
     curl -sL https://aka.ms/InstallAzureCLIDeb | bash && \
     rm -rf /var/lib/apt/lists/*
 
